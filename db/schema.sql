@@ -1,0 +1,6 @@
+CREATE TABLE postcards (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    city TEXT NOT NULL,
+    image_prompt TEXT NOT NULL,
+    image_key TEXT
+);
