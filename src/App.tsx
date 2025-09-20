@@ -95,13 +95,13 @@ function App() {
       if (response.ok) {
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
-        
+
         // Convert blob to base64 for saving later
         const reader = new FileReader();
         reader.onloadend = () => {
           const base64data = reader.result as string;
-          const base64Image = base64data.split(',')[1]; // Remove data:image/png;base64, prefix
-          
+          const base64Image = base64data.split(",")[1]; // Remove data:image/png;base64, prefix
+
           const postcard: Postcard = {
             id: 0, // Temporary ID
             city: cityName,
@@ -109,7 +109,7 @@ function App() {
             prompt: prompt,
             imageKey: "",
           };
-          
+
           // Store base64 data for saving later
           (postcard as any).tempImageData = base64Image;
           setCurrentPostcard(postcard);
@@ -225,7 +225,7 @@ function App() {
 
       if (response.ok) {
         const data = await response.json();
-        
+
         // Update the postcard with the saved ID and image URL
         const savedPostcard: Postcard = {
           ...currentPostcard,
@@ -233,7 +233,7 @@ function App() {
           imageUrl: `${API_BASE}/image/${data.id}`,
           imageKey: data.imageKey,
         };
-        
+
         setCurrentPostcard(savedPostcard);
         setIsPostcardSaved(true);
         fetchGallery(); // Refresh gallery to show the new postcard
@@ -249,7 +249,7 @@ function App() {
 
   const regenerateImage = async () => {
     if (!generatedPrompt) return;
-    
+
     setIsGenerating(true);
     setCurrentPostcard(null);
     setIsPostcardSaved(false);
@@ -309,7 +309,8 @@ function App() {
             <label htmlFor="bearer-token">Bearer Token:</label>
             <input
               id="bearer-token"
-              type="text"
+              type="password"
+              autoComplete="off"
               value={bearerToken}
               onChange={(e) => setBearerToken(e.target.value)}
               placeholder="Enter your bearer token"
@@ -355,7 +356,7 @@ function App() {
                   <p className="postcard-prompt">{currentPostcard.prompt}</p>
                 </div>
               </div>
-              
+
               {!isPostcardSaved && (
                 <div className="postcard-actions">
                   <button
@@ -374,7 +375,7 @@ function App() {
                   </button>
                 </div>
               )}
-              
+
               {isPostcardSaved && (
                 <div className="postcard-saved">
                   <p>✅ Postcard saved to gallery!</p>

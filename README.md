@@ -26,7 +26,7 @@ This project extends the original workshop with the following enhancements:
 
 - **Frontend**: React 19, TypeScript, CSS3
 - **Backend**: Cloudflare Workers, Hono framework
-- **AI Models**: 
+- **AI Models**:
   - `@cf/openai/gpt-oss-20b` for prompt generation
   - `@cf/leonardo/lucid-origin` for image generation
 - **Database**: Cloudflare D1 (SQLite)
@@ -38,7 +38,7 @@ This project extends the original workshop with the following enhancements:
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - Cloudflare account
 - Wrangler CLI installed globally
 
@@ -47,8 +47,8 @@ This project extends the original workshop with the following enhancements:
 1. Clone the repository:
 
 ```bash
-git clone <your-repo-url>
-cd cloudflare-postcard-harshil
+git clone https://github.com/JKrokos/ai-postcard-generator.git
+cd ai-postcard-generator
 ```
 
 2. Install dependencies:
@@ -58,10 +58,13 @@ npm install
 ```
 
 3. Configure Cloudflare resources:
+
    - Update `wrangler.jsonc` with your actual database ID and bucket name
    - Create D1 database: `npx wrangler d1 create your-database-name`
    - Create R2 bucket: `npx wrangler r2 bucket create your-bucket-name`
-   - Set bearer token: `npx wrangler secret put BEARER_TOKEN`
+   - Configure bearer token:
+     - **For development**: Copy `.dev.vars.example` to `.dev.vars` and replace with your actual bearer token
+     - **For production**: Run `npx wrangler secret put BEARER_TOKEN` and paste your token when prompted
 
 4. Deploy database schema:
 
@@ -78,6 +81,7 @@ npm run deploy
 ### Development
 
 Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -87,6 +91,7 @@ The application will be available at `http://localhost:5173`
 ### Deployment
 
 Deploy to Cloudflare:
+
 ```bash
 npm run deploy
 ```
@@ -141,6 +146,13 @@ The application uses a modern gradient design with glassmorphism effects. You ca
 - CORS headers configured
 - Environment variables for sensitive data
 
+### Bearer Token Configuration
+
+The application requires a bearer token for API authentication. This token should be:
+- A secure, randomly generated string (e.g., using `openssl rand -hex 32`)
+- The same token used by clients to authenticate API requests
+- Kept secret and never committed to version control
+
 ## ⚠️ Security Notice
 
 **This application is currently configured for development/demo purposes.** Before deploying to production:
@@ -167,4 +179,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## 📞 Support
 
 If you have any questions or issues, please open an issue on GitHub.
-
