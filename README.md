@@ -2,6 +2,8 @@
 
 A full-stack AI-powered application that generates beautiful postcard images from city names using Cloudflare's edge computing platform. Built with React, TypeScript, and Cloudflare Workers.
 
+![AI Postcard Generator](ai-postcards-generator.png)
+
 ## 🚀 Improvements from Original Workshop
 
 This project extends the original workshop with the following enhancements:
